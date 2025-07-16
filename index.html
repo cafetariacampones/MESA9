@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio - Camponês Cafeteria</title>
+  <style>body {
+  font-family: 'Georgia', serif;
+  margin: 0;
+  padding: 0;
+  background: url('fundo-campones.png') center/cover no-repeat;
+  color: #4b2e1e;
+  position: relative;
+  min-height: 100vh;
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.55); /* Transparência branca */
+  z-index: -1;
+}
+    
+header {
+  text-align: center;
+  padding: 1rem;
+  background: transparent; /* Tira o quadro marrom */
+  color: #4b2e1e; /* Mesma cor do texto do restante do site */
+    }
+
+    .mesa {
+      font-size: 2rem;
+      margin: 0.5rem 0;
+    }
+
+    .chamar {
+      background: #8b4513;
+      color: #fff;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: rgba(0,0,0,0.7);
+    }
+
+    nav button {
+      background: transparent;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    nav button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+main {
+  max-width: 600px;
+  margin: 1rem auto;
+  background: transparent; /* agora o fundo é transparente */
+  border-radius: 16px;
+  box-shadow: none; /* remove a sombra também */
+  padding: 1rem;
+    }
+
+    .categoria {
+      font-size: 1.4rem;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem;
+      border-bottom: 1px dashed #a65f38;
+    }
+
+    .controles {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .controles button {
+      background: #a65f38;
+      color: #fff;
+      border: none;
+      padding: 0.4rem 0.9rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .carrinho {
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      position: sticky;
+      bottom: 0;
+    }
+
+    .finalizar {
+      background: #2e7d32;
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      width: 100%;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .mesa {
+        font-size: 1.4rem;
+      }
+
+      .chamar {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+      }
+
+      nav button {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+      }
+
+      main {
+        margin: 0.5rem;
+        padding: 0.8rem;
+      }
+
+      .item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .controles {
+        margin-top: 0.5rem;
+      }
+
+      .finalizar {
+        font-size: 1rem;
+        padding: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+ <img src="logo-campones.png" alt="Logo Camponês" class="logo" style="max-height:100px;border-radius:50%;">
+  <div class="mesa">MESA 1</div>
+  <button class="chamar" onclick="alert('Garçom chamado!')">Chamar Garçom</button>
+</header>
+
+<nav>
+  <button onclick="filtrar('Massas')">🍝 Massas</button>
+  <button onclick="filtrar('Lanches')">🍴 Lanches</button>
+  <button onclick="filtrar('Sanduíche Natural')">🥪 Sanduíche Natural</button>
+  <button onclick="filtrar('Crepioca')">🌯 Crepioca</button>
+  <button onclick="filtrar('Tapioca')">🌮 Tapioca</button>
+  <button onclick="filtrar('Omelete')">🍳 Omelete</button>
+  <button onclick="filtrar('Cuscuz Nordestino')">🌽 Cuscuz</button>
+  <button onclick="filtrar('Pratos')">🍳 Pratos</button>
+  <button onclick="filtrar('Pizza')">🍕 Pizza</button>
+  <button onclick="filtrar('Café Quente')">☕ Café Quente</button>
+  <button onclick="filtrar('Café Gelado')">❄️ Café Gelado</button>
+  <button onclick="filtrar('Frappuccino')">🧋 Frappuccino</button>
+  <button onclick="filtrar('Chocolate Quente')">🍫 Chocolate Quente</button>
+  <button onclick="filtrar('Bebidas')">🥤 Bebidas</button>
+  <button onclick="filtrar('Bolo')">🍰 Bolo</button>
+  <button onclick="filtrar('Brownie')">🍫 Brownie</button>
+  <button onclick="filtrar('Waffles')">🧇 Waffles</button>
+  <button onclick="filtrar('Todas')">Ver Tudo</button>
+</nav>
+
+<main id="cardapio"></main>
+
+<div class="carrinho">
+  <div id="pedido">Pedido vazio</div>
+  <button class="finalizar" onclick="enviarWhats()">Finalizar Pedido via WhatsApp</button>
+</div>
+
+<script>
+let produtos = [
+  {categoria:"Massas", nome:"Fettuccine", preco:28},
+  {categoria:"Massas", nome:"Talharim", preco:28},
+  {categoria:"Massas", nome:"Nhoque", preco:28},
+  {categoria:"Massas", nome:"Ravioli", preco:32},
+  {categoria:"Massas", nome:"Lasanha", preco:32},
+
+  {categoria:"Lanches", nome:"Salgados", preco:8},
+  {categoria:"Lanches", nome:"Pão de queijo unid.", preco:6},
+  {categoria:"Lanches", nome:"Pão na chapa", preco:7},
+  {categoria:"Lanches", nome:"Pão com ovo", preco:10},
+  {categoria:"Lanches", nome:"Pão com ovo e queijo", preco:12},
+  {categoria:"Lanches", nome:"Pão com costela", preco:21},
+  {categoria:"Lanches", nome:"Queijo quente", preco:13},
+  {categoria:"Lanches", nome:"Misto quente", preco:15},
+  {categoria:"Lanches", nome:"Misto de peito de peru com queijo", preco:16},
+
+  {categoria:"Sanduíche Natural", nome:"Queijo minas e peito de peru", preco:19},
+  {categoria:"Sanduíche Natural", nome:"Frango desfiado com cream cheese", preco:19},
+  {categoria:"Sanduíche Natural", nome:"Atum e cenoura", preco:18},
+
+  {categoria:"Brownie", nome:"Simples", preco:11},
+  {categoria:"Brownie", nome:"Com sorvete", preco:18},
+  {categoria:"Brownie", nome:"Com sorvete e chantilly", preco:22},
+
+  {categoria:"Bolo", nome:"Bolo (fatia)", preco:10},
+
+  {categoria:"Cuscuz Nordestino", nome:"Simples", preco:19},
+  {categoria:"Cuscuz Nordestino", nome:"Carne seca", preco:27},
+  {categoria:"Cuscuz Nordestino", nome:"Costela", preco:27},
+  {categoria:"Cuscuz Nordestino", nome:"Queijo coalho e carne seca", preco:34},
+
+  {categoria:"Pizza", nome:"Pizza", preco:23},
+
+  {categoria:"Pratos", nome:"Ovos mexidos", preco:20},
+  {categoria:"Pratos", nome:"Frango", preco:22},
+
+  {categoria:"Tapioca", nome:"Manteiga", preco:10},
+  {categoria:"Tapioca", nome:"Frango com catupiry", preco:15},
+  {categoria:"Tapioca", nome:"Queijo e presunto", preco:18},
+  {categoria:"Tapioca", nome:"Queijo e peito de peru", preco:18},
+  {categoria:"Tapioca", nome:"Carne seca e queijo", preco:21},
+  {categoria:"Tapioca", nome:"Creme de avelã", preco:18},
+  {categoria:"Tapioca", nome:"Leite condensado e coco", preco:18},
+
+  {categoria:"Crepioca", nome:"Queijo e presunto", preco:19},
+  {categoria:"Crepioca", nome:"Frango", preco:19},
+  {categoria:"Crepioca", nome:"Queijo e peito de peru", preco:19},
+
+  {categoria:"Omelete", nome:"Queijo e presunto", preco:17},
+  {categoria:"Omelete", nome:"Frango", preco:19},
+  {categoria:"Omelete", nome:"Queijo e peito de peru", preco:19},
+  {categoria:"Omelete", nome:"Torrada com ovos", preco:11},
+
+  {categoria:"Waffles", nome:"Manteiga", preco:12},
+  {categoria:"Waffles", nome:"Mel", preco:12},
+  {categoria:"Waffles", nome:"Pizza", preco:20},
+  {categoria:"Waffles", nome:"Nutella e morango", preco:28},
+  {categoria:"Waffles", nome:"Nutella, morango e chantilly", preco:32},
+  {categoria:"Waffles", nome:"Kit Kat e sorvete", preco:32},
+
+  {categoria:"Café Quente", nome:"Espresso Peq", preco:7},
+  {categoria:"Café Quente", nome:"Espresso Gr", preco:11},
+  {categoria:"Café Quente", nome:"Latte Peq", preco:10},
+  {categoria:"Café Quente", nome:"Latte Gr", preco:12},
+  {categoria:"Café Quente", nome:"Macchiato Peq", preco:10},
+  {categoria:"Café Quente", nome:"Macchiato Gr", preco:12},
+  {categoria:"Café Quente", nome:"Con panna Peq", preco:11},
+  {categoria:"Café Quente", nome:"Con panna Gr", preco:13},
+  {categoria:"Café Quente", nome:"Cappuccino Peq", preco:11},
+  {categoria:"Café Quente", nome:"Cappuccino Gr", preco:13},
+  {categoria:"Café Quente", nome:"Camponês Peq", preco:18},
+  {categoria:"Café Quente", nome:"Camponês Gr", preco:20},
+  {categoria:"Café Quente", nome:"Mocha Peq", preco:15},
+  {categoria:"Café Quente", nome:"Mocha Gr", preco:17},
+  {categoria:"Café Quente", nome:"Mocha borda com avelã Peq", preco:17},
+  {categoria:"Café Quente", nome:"Mocha borda com avelã Gr", preco:19},
+  {categoria:"Café Quente", nome:"Irish Coffee (Alcoólico)", preco:22},
+
+  {categoria:"Café Gelado", nome:"Cappuccino gelado", preco:18},
+  {categoria:"Café Gelado", nome:"Affogatto", preco:20},
+  {categoria:"Café Gelado", nome:"Orange coffee", preco:18},
+  {categoria:"Café Gelado", nome:"Coffee lover", preco:18},
+
+  {categoria:"Frappuccino", nome:"Tradicional", preco:22},
+  {categoria:"Frappuccino", nome:"Creme de avelã", preco:24},
+  {categoria:"Frappuccino", nome:"Ovomaltine", preco:25},
+  {categoria:"Frappuccino", nome:"Morango e creme de avelã", preco:25},
+
+  {categoria:"Chocolate Quente", nome:"Tradicional Peq", preco:10},
+  {categoria:"Chocolate Quente", nome:"Tradicional Gr", preco:12},
+  {categoria:"Chocolate Quente", nome:"Com chantilly Peq", preco:15},
+  {categoria:"Chocolate Quente", nome:"Com chantilly Gr", preco:17},
+  {categoria:"Chocolate Quente", nome:"Creme de avelã Peq", preco:16},
+  {categoria:"Chocolate Quente", nome:"Creme de avelã Gr", preco:18},
+  {categoria:"Chocolate Quente", nome:"Creme de avelã e chantilly Peq", preco:19},
+  {categoria:"Chocolate Quente", nome:"Creme de avelã e chantilly Gr", preco:22},
+
+  {categoria:"Bebidas", nome:"Água sem gás", preco:4},
+  {categoria:"Bebidas", nome:"Água com gás", preco:5},
+  {categoria:"Bebidas", nome:"Refrigerante", preco:7},
+  {categoria:"Bebidas", nome:"Suco (300ml)", preco:15},
+  {categoria:"Bebidas", nome:"Mate da casa", preco:8}
+  ];
+
+  let carrinho = {};
+
+  function filtrar(categoria) {
+    let html = "";
+    produtos.filter(p => categoria=="Todas" || p.categoria==categoria).forEach(p=>{
+      html += `<div class="item">${p.nome} – R$${p.preco} 
+        <div class="controles">
+          <button onclick="alterar('${p.nome}',${p.preco},-1)">-</button>
+          <button onclick="alterar('${p.nome}',${p.preco},1)">+</button>
+        </div></div>`;
+    });
+    document.getElementById("cardapio").innerHTML = html;
+  }
+
+  function alterar(item, preco, qtd) {
+    if (!carrinho[item]) carrinho[item] = {qtd:0, preco: preco};
+    carrinho[item].qtd += qtd;
+    if (carrinho[item].qtd <=0) delete carrinho[item];
+    atualizarCarrinho();
+  }
+
+  function atualizarCarrinho(){
+    let texto = "";
+    let total = 0;
+    for (let i in carrinho) {
+      texto += `${carrinho[i].qtd}x ${i}<br>`;
+      total += carrinho[i].qtd * carrinho[i].preco;
+    }
+    if (total > 0) {
+      texto += `<strong>Total: R$${total.toFixed(2).replace('.', ',')}</strong>`;
+    } else {
+      texto = "Pedido vazio";
+    }
+    document.getElementById("pedido").innerHTML = texto;
+  }
+
+  function enviarWhats(){
+    if (Object.keys(carrinho).length===0){
+      alert("Seu pedido está vazio.");
+      return;
+    }
+    let msg = " MESA 1 Gostaria de fazer o seguinte pedido:%0A";
+    for (let i in carrinho) {
+      msg += `- ${carrinho[i].qtd}x ${i}%0A`;
+    }
+    let total = 0;
+    for (let i in carrinho) {
+      total += carrinho[i].qtd * carrinho[i].preco;
+    }
+    msg += `%0ATotal: R$${total.toFixed(2).replace('.', ',')}`;
+    window.open(`https://wa.me/5521979209224?text=${msg}`,"_blank");
+    carrinho = {};
+    atualizarCarrinho();
+  }
+
+  // inicial
+  filtrar('Massas');
+</script>
+
+</body>
+</html>
