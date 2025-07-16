@@ -168,7 +168,7 @@ main {
 
 <header>
  <img src="logo-campones.png" alt="Logo Camponês" class="logo" style="max-height:100px;border-radius:50%;">
-  <div class="mesa">MESA 1</div>
+  <div class="mesa">MESA 9</div>
   <button class="chamar" onclick="alert('Garçom chamado!')">Chamar Garçom</button>
 </header>
 
@@ -181,7 +181,6 @@ main {
   <button onclick="filtrar('Omelete')">🍳 Omelete</button>
   <button onclick="filtrar('Cuscuz Nordestino')">🌽 Cuscuz</button>
   <button onclick="filtrar('Pratos')">🍳 Pratos</button>
-  <button onclick="filtrar('Pizza')">🍕 Pizza</button>
   <button onclick="filtrar('Café Quente')">☕ Café Quente</button>
   <button onclick="filtrar('Café Gelado')">❄️ Café Gelado</button>
   <button onclick="filtrar('Frappuccino')">🧋 Frappuccino</button>
@@ -264,8 +263,7 @@ let produtos = [
 
   {categoria:"Café Quente", nome:"Espresso Peq", preco:7},
   {categoria:"Café Quente", nome:"Espresso Gr", preco:11},
-  {categoria:"Café Quente", nome:"Latte Peq", preco:10},
-  {categoria:"Café Quente", nome:"Latte Gr", preco:12},
+  {categoria:"Café Quente", nome:"Latte", preco:11},
   {categoria:"Café Quente", nome:"Macchiato Peq", preco:10},
   {categoria:"Café Quente", nome:"Macchiato Gr", preco:12},
   {categoria:"Café Quente", nome:"Con panna Peq", preco:11},
@@ -347,7 +345,7 @@ let produtos = [
       alert("Seu pedido está vazio.");
       return;
     }
-    let msg = " MESA 1 Gostaria de fazer o seguinte pedido:%0A";
+    let msg = " MESA 9 Gostaria de fazer o seguinte pedido:%0A";
     for (let i in carrinho) {
       msg += `- ${carrinho[i].qtd}x ${i}%0A`;
     }
@@ -356,7 +354,7 @@ let produtos = [
       total += carrinho[i].qtd * carrinho[i].preco;
     }
     msg += `%0ATotal: R$${total.toFixed(2).replace('.', ',')}`;
-    window.open(`https://wa.me/5521979209224?text=${msg}`,"_blank");
+    window.open(`https://wa.me/5521972754129?text=${msg}`,"_blank");
     carrinho = {};
     atualizarCarrinho();
   }
