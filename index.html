@@ -180,7 +180,6 @@ main {
   <button onclick="filtrar('Tapioca')">🌮 Tapioca</button>
   <button onclick="filtrar('Omelete')">🍳 Omelete</button>
   <button onclick="filtrar('Cuscuz Nordestino')">🌽 Cuscuz</button>
-  <button onclick="filtrar('Pratos')">🍳 Pratos</button>
   <button onclick="filtrar('Café Quente')">☕ Café Quente</button>
   <button onclick="filtrar('Café Gelado')">❄️ Café Gelado</button>
   <button onclick="filtrar('Frappuccino')">🧋 Frappuccino</button>
@@ -188,7 +187,7 @@ main {
   <button onclick="filtrar('Bebidas')">🥤 Bebidas</button>
   <button onclick="filtrar('Bolo')">🍰 Bolo</button>
   <button onclick="filtrar('Brownie')">🍫 Brownie</button>
-  <button onclick="filtrar('Waffles')">🧇 Waffles</button>
+  
   <button onclick="filtrar('Todas')">Ver Tudo</button>
 </nav>
 
@@ -201,25 +200,33 @@ main {
 
 <script>
 let produtos = [
-  {categoria:"Massas", nome:"Fettuccine", preco:28},
-  {categoria:"Massas", nome:"Talharim", preco:28},
-  {categoria:"Massas", nome:"Nhoque", preco:28},
-  {categoria:"Massas", nome:"Ravioli", preco:32},
-  {categoria:"Massas", nome:"Lasanha", preco:32},
-
+   {categoria:"Massas", nome:"Fettuccine (molho branco)", preco:28},
+ {categoria:"Massas", nome:"Fettuccine (molho sugo)", preco:28},
+ {categoria:"Massas", nome:"Fettuccine (molho bolonhesa)", preco:28},
+  {categoria:"Massas", nome:"Talharim (molho bolonhesa)", preco:28},
+    {categoria:"Massas", nome:"Talharim (molho branco)", preco:28},
+    {categoria:"Massas", nome:"Talharim (molho sugo)", preco:28},
+  {categoria:"Massas", nome:"Nhoque (molho branco)", preco:28},
+    {categoria:"Massas", nome:"Nhoque (molho sugo)", preco:28},
+  {categoria:"Massas", nome:"Nhoque (molho bolonhesa)", preco:28},
+  {categoria:"Massas", nome:"Ravioli (molho branco)", preco:32},
+  {categoria:"Massas", nome:"Ravioli (molho sugo)", preco:32},
+{categoria:"Massas", nome:"Ravioli (molho bolonhesa)", preco:32},
+  {categoria:"Massas", nome:"Lasanha (molho branco)", preco:32},
+  {categoria:"Massas", nome:"Lasanha (molho sugo)", preco:32},
+{categoria:"Massas", nome:"Lasanha (molho bolonhesa)", preco:32},
   {categoria:"Lanches", nome:"Salgados", preco:8},
   {categoria:"Lanches", nome:"Pão de queijo unid.", preco:6},
   {categoria:"Lanches", nome:"Pão na chapa", preco:7},
-  {categoria:"Lanches", nome:"Pão com ovo", preco:10},
+  {categoria:"Lanches", nome:"Pão com ovo", preco:9},
   {categoria:"Lanches", nome:"Pão com ovo e queijo", preco:12},
   {categoria:"Lanches", nome:"Pão com costela", preco:21},
   {categoria:"Lanches", nome:"Queijo quente", preco:13},
   {categoria:"Lanches", nome:"Misto quente", preco:15},
   {categoria:"Lanches", nome:"Misto de peito de peru com queijo", preco:16},
 
-  {categoria:"Sanduíche Natural", nome:"Queijo minas e peito de peru", preco:19},
-  {categoria:"Sanduíche Natural", nome:"Frango desfiado com cream cheese", preco:19},
-  {categoria:"Sanduíche Natural", nome:"Atum e cenoura", preco:18},
+  {categoria:"Sanduíche Natural", nome:"peito de peru", preco:19},
+  {categoria:"Sanduíche Natural", nome:"Frango", preco:18},
 
   {categoria:"Brownie", nome:"Simples", preco:11},
   {categoria:"Brownie", nome:"Com sorvete", preco:18},
@@ -228,14 +235,14 @@ let produtos = [
   {categoria:"Bolo", nome:"Bolo (fatia)", preco:10},
 
   {categoria:"Cuscuz Nordestino", nome:"Simples", preco:19},
+   {categoria:"Cuscuz Nordestino", nome:"Pizza", preco:23},
+ {categoria:"Cuscuz Nordestino", nome:"Ovos Mexidos", preco:20},
+ {categoria:"Cuscuz Nordestino", nome:"frango", preco:19},
   {categoria:"Cuscuz Nordestino", nome:"Carne seca", preco:27},
   {categoria:"Cuscuz Nordestino", nome:"Costela", preco:27},
   {categoria:"Cuscuz Nordestino", nome:"Queijo coalho e carne seca", preco:34},
 
   {categoria:"Pizza", nome:"Pizza", preco:23},
-
-  {categoria:"Pratos", nome:"Ovos mexidos", preco:20},
-  {categoria:"Pratos", nome:"Frango", preco:22},
 
   {categoria:"Tapioca", nome:"Manteiga", preco:10},
   {categoria:"Tapioca", nome:"Frango com catupiry", preco:15},
@@ -243,24 +250,23 @@ let produtos = [
   {categoria:"Tapioca", nome:"Queijo e peito de peru", preco:18},
   {categoria:"Tapioca", nome:"Carne seca e queijo", preco:21},
   {categoria:"Tapioca", nome:"Creme de avelã", preco:18},
-  {categoria:"Tapioca", nome:"Leite condensado e coco", preco:18},
+  {categoria:"Tapioca", nome:"Leite condensado e coco", preco:16},
 
   {categoria:"Crepioca", nome:"Queijo e presunto", preco:19},
-  {categoria:"Crepioca", nome:"Frango", preco:19},
+  {categoria:"Crepioca", nome:"Frango", preco:17},
   {categoria:"Crepioca", nome:"Queijo e peito de peru", preco:19},
 
   {categoria:"Omelete", nome:"Queijo e presunto", preco:17},
-  {categoria:"Omelete", nome:"Frango", preco:19},
+  {categoria:"Omelete", nome:"Frango", preco:15},
   {categoria:"Omelete", nome:"Queijo e peito de peru", preco:19},
-  {categoria:"Omelete", nome:"Torrada com ovos", preco:11},
+  {categoria:"Lanches", nome:"Torrada com ovos", preco:11},
 
   {categoria:"Waffles", nome:"Manteiga", preco:12},
   {categoria:"Waffles", nome:"Mel", preco:12},
   {categoria:"Waffles", nome:"Pizza", preco:20},
   {categoria:"Waffles", nome:"Nutella e morango", preco:28},
   {categoria:"Waffles", nome:"Nutella, morango e chantilly", preco:32},
-  {categoria:"Waffles", nome:"Kit Kat e sorvete", preco:32},
-
+  
   {categoria:"Café Quente", nome:"Espresso Peq", preco:7},
   {categoria:"Café Quente", nome:"Espresso Gr", preco:11},
   {categoria:"Café Quente", nome:"Latte", preco:11},
@@ -276,11 +282,11 @@ let produtos = [
   {categoria:"Café Quente", nome:"Mocha Gr", preco:17},
   {categoria:"Café Quente", nome:"Mocha borda com avelã Peq", preco:17},
   {categoria:"Café Quente", nome:"Mocha borda com avelã Gr", preco:19},
-  {categoria:"Café Quente", nome:"Irish Coffee (Alcoólico)", preco:22},
+  {categoria:"Café Quente", nome:"Irish Coffee (Alcoólico)", preco:18},
 
   {categoria:"Café Gelado", nome:"Cappuccino gelado", preco:18},
   {categoria:"Café Gelado", nome:"Affogatto", preco:20},
-  {categoria:"Café Gelado", nome:"Orange coffee", preco:18},
+  {categoria:"Café Gelado", nome:"Orange coffee", preco:19},
   {categoria:"Café Gelado", nome:"Coffee lover", preco:18},
 
   {categoria:"Frappuccino", nome:"Tradicional", preco:22},
